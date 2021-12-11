@@ -7,4 +7,4 @@
 3. Use the spacebar key to pause or resume the game.
 4. The score and length of the snake increases when it eats the fruit (apple) in the playing area.
 5. The game finishes when the snake touches the boundary, it's own tail or the virus in the playing area.
-6. when game finishes takes game score and adds it to database and displays highscores.
+6. when game finishes  shows pop up where it takes the game scores and adds it to the database and displays new/previous highscores.
