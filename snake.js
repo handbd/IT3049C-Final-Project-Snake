@@ -264,6 +264,17 @@ if (checkCollision()) {
     }, 1000);
 }
 }
+//---------------------------------------------------Highscore Board---------------------------------------------------//
+function resetForm (){
+    // delete li elements holding high score data
+    while (List.hasChildNodes()){
+        List.removeChild(List.firstChild);
+   }
+    // fetch scores.json and create new li elements holding the data
+    get_scores(list_scores);
+}
+
+
 //------------------------------------------------------VIRUS-----------------------------------------------------------//
 function virusPosition() {
     let virus=generateCoordinates();
@@ -308,6 +319,7 @@ function checkSamePosition() {
         }
     }
 }
+
 
 function main() {
     //update state at specified interval
