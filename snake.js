@@ -274,7 +274,7 @@ myform.addEventListener("startBtn", function (event){// listen for the submit bu
     formData.append("score", score);
 
     // fetch request
-    fetch ("Scoreboard.php",{// sending to dice.php
+    fetch ("Scoreboard.php",{// sending to Scoreboard.php
         method: "post", // using method post
         body: formData // we are sending formData
    })
@@ -398,6 +398,7 @@ function main() {
         drawFruit();
         moveSnakeForward();
         drawSnake();
+
 
 
         //check if snake eats the fruit - increase size of its tail, update score and find new fruit position
