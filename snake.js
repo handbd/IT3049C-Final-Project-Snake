@@ -5,6 +5,12 @@ var startBtn = document.getElementById("startBtn");
 var pauseBtn = document.getElementById("pauseBtn");
 var resumeBtn = document.getElementById("resumeBtn");
 var scoresBtn = document.getElementById("scoresBtn")
+// ol element containing high scores
+const List=document.getElementById("highscores");
+// game submition form
+const myform=document.getElementById("myform");
+// element displaying error messages
+const Errors=document.getElementById("error");
 var fruit = document.getElementById("fruit");
 var virus = document.getElementById("virus");
 var snakeHeadX, snakeHeadY, fruitX, fruitY, virusX, virusY, tail, totalTail, directionVar, direction, previousDir;
