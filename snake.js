@@ -1,11 +1,10 @@
 var canvas = document.getElementById("snakeCanvas");
 var context = canvas.getContext("2d");
 var score = document.getElementById("score");
-const hiscores = JSON.parse(localStorage.getItem('hiscores')) || [];
-const scoreList = document.querySelector('.scoretable');
 var startBtn = document.getElementById("startBtn");
 var pauseBtn = document.getElementById("pauseBtn");
 var resumeBtn = document.getElementById("resumeBtn");
+var scoresBtn = document.getElementById("scoresBtn")
 var fruit = document.getElementById("fruit");
 var virus = document.getElementById("virus");
 var snakeHeadX, snakeHeadY, fruitX, fruitY, virusX, virusY, tail, totalTail, directionVar, direction, previousDir;
@@ -45,39 +44,6 @@ function reset() {
     boundaryCollision=false;
 }
 
-function populateTable() {
-    scoreList.innerHTML = hiscores.map((row) => {
-      return `<tr><td>${row.clicker}</td><td>${row.score}</tr>`;
-    }).join('');
-  }
-
-  function checkScore() {
-    let worstScore = 0;
-    if (hiscores.length > 4) {
-      worstScore = hiscores[hiscores.length - 1].score;
-    }
-
-    if (score > worstScore) {
-      const clicker = window.prompt(`${score} – Top score! What's your name?`);
-      hiscores.push({score, clicker});
-    }
-
-    hiscores.sort((a, b) => a.score > b.score ? -1 : 1);
-
-    // Remove the worst score when table too long
-    if (hiscores.length > 5) {
-      hiscores.pop();
-    }
-
-    populateTable();
-    localStorage.setItem('hiscores', JSON.stringify(hiscores));
-  }
-
-  function clearScores() {
-    hiscores.splice(0, hiscores.length);
-    localStorage.setItem('hiscores', JSON.stringify(hiscores));
-    populateTable(hiscores, scoreList);
-  }
 
 function startGame() {
     reset();
@@ -86,6 +52,7 @@ function startGame() {
     fruitPosition();
     virusPosition();
     main();
+
 }
 
 function pauseGame() {
@@ -272,6 +239,7 @@ if (checkCollision()) {
     setTimeout(()=>{ 
         scoreModal.textContent = totalTail;
         $('#alertModal').modal('show');
+        
         //if modal is shown, remove the keydown event listener so that snake doesn't move 
         $( "#alertModal" ).on('shown.bs.modal', function(){
             window.removeEventListener("keydown", pressedKey);
@@ -280,8 +248,6 @@ if (checkCollision()) {
         $('#alertModal').on('hidden.bs.modal', function () {
             context.clearRect(0, 0, 500, 500);
             score.innerText = 0;
-            checkScore();
-            clearScores();
             window.addEventListener("keydown", pressedKey);
             reset();
           })
@@ -347,6 +313,7 @@ function main() {
         drawFruit();
         moveSnakeForward();
         drawSnake();
+
 
         //check if snake eats the fruit - increase size of its tail, update score and find new fruit position
         if (snakeHeadX === fruitX && snakeHeadY === fruitY) {

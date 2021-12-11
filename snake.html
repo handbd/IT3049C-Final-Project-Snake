@@ -13,7 +13,13 @@
 <body>
     <div class="gamePage d-flex flex-column justify-content-center align-items-center">
         <h1>Snake</h1>
-        <div id="startBtn" class="btn mt-2 mb-4">Start Game?</div>
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+              <input type="text" class="form-control" id="inputPassword2" placeholder="Snake's Name">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">submit </button>
+          </form>
+        <div id="startBtn" class="btn btn-primary btn-lg">Start Game?</div>
         <div class="rel">
             <div class="d-flex buttons">
                 <div id="pauseBtn">
@@ -34,11 +40,7 @@
                     <div class="modal-body">
                         <img id="snake" src="images/snake.png" alt="snake">     
                         <p>Game Over! Your Score is: <span id="scoreModal"></span></p>
-                        <div class="hiscore">
-                            <p>Top 5 Snakes!(on this device)</p>
-                            <table class="scoretable">
-                            </table>
-                          </div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"> Highscores </button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn modal-btn" data-dismiss="modal">Ok</button>
