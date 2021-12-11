@@ -19,6 +19,7 @@ h2 {
     left: -230px;
 }
 
+
 canvas {
     background-image: url(./images/green.jpg);
     background-repeat: no-repeat;
@@ -98,3 +99,9 @@ canvas {
 #pauseBtn:hover, #resumeBtn:hover {
     background-color: #ccc;
 }
+
+.scoretable {
+    width: 350px;
+    font-size: 5rem;
+    margin: 10px auto;
+  }

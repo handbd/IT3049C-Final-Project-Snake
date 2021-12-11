@@ -1,6 +1,8 @@
 var canvas = document.getElementById("snakeCanvas");
 var context = canvas.getContext("2d");
 var score = document.getElementById("score");
+const hiscores = JSON.parse(localStorage.getItem('hiscores')) || [];
+const scoreList = document.querySelector('.scoretable');
 var startBtn = document.getElementById("startBtn");
 var pauseBtn = document.getElementById("pauseBtn");
 var resumeBtn = document.getElementById("resumeBtn");
@@ -42,6 +44,40 @@ function reset() {
     playing=false, gameStarted=false;
     boundaryCollision=false;
 }
+
+function populateTable() {
+    scoreList.innerHTML = hiscores.map((row) => {
+      return `<tr><td>${row.clicker}</td><td>${row.score}</tr>`;
+    }).join('');
+  }
+
+  function checkScore() {
+    let worstScore = 0;
+    if (hiscores.length > 4) {
+      worstScore = hiscores[hiscores.length - 1].score;
+    }
+
+    if (score > worstScore) {
+      const clicker = window.prompt(`${score} – Top score! What's your name?`);
+      hiscores.push({score, clicker});
+    }
+
+    hiscores.sort((a, b) => a.score > b.score ? -1 : 1);
+
+    // Remove the worst score when table too long
+    if (hiscores.length > 5) {
+      hiscores.pop();
+    }
+
+    populateTable();
+    localStorage.setItem('hiscores', JSON.stringify(hiscores));
+  }
+
+  function clearScores() {
+    hiscores.splice(0, hiscores.length);
+    localStorage.setItem('hiscores', JSON.stringify(hiscores));
+    populateTable(hiscores, scoreList);
+  }
 
 function startGame() {
     reset();
@@ -244,6 +280,9 @@ if (checkCollision()) {
         $('#alertModal').on('hidden.bs.modal', function () {
             context.clearRect(0, 0, 500, 500);
             score.innerText = 0;
+            checkScore();
+            clearScores();
+            window.addEventListener("keydown", pressedKey);
             window.addEventListener("keydown", pressedKey);
             reset();
           })
