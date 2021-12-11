@@ -254,3 +254,75 @@ if (checkCollision()) {
     }, 1000);
 }
 }
+//------------------------------------------------------VIRUS-----------------------------------------------------------//
+function virusPosition() {
+    let virus=generateCoordinates();
+    virusX=virus.xCoordinate;
+    virusY=virus.yCoordinate;
+}
+
+function drawVirus() {
+    context.drawImage(virus, virusX, virusY, scale, scale);
+}
+
+//------------------------------------------------------FRUIT-----------------------------------------------------------//
+//generate random fruit position within canvas boundaries
+function fruitPosition() {
+    let fruit=generateCoordinates();
+    fruitX=fruit.xCoordinate;
+    fruitY=fruit.yCoordinate;
+}
+
+//draw image of fruit
+function drawFruit() {
+    context.drawImage(fruit, fruitX, fruitY, scale, scale);
+}
+
+//------------------------------------------------------MAIN GAME-----------------------------------------------------------//
+function checkSamePosition() {
+    if(fruitX==virusX && fruitY==virusY) {
+        virusPosition();
+    }
+    for(let i=0; i< tail.length; i++){
+        if(virusX===tail[i].tailX && virusY===tail[i].tailY)
+        {
+            virusPosition();
+            break;
+        }
+    }
+    for(let i=0; i< tail.length; i++){
+        if(fruitX===tail[i].tailX && fruitY===tail[i].tailY)
+        {
+            fruitPosition();
+            break;
+        }
+    }
+}
+
+function main() {
+    //update state at specified interval
+    virusInterval = window.setInterval(virusPosition, 10000);
+    gameInterval = window.setInterval(() => {
+        context.clearRect(0, 0, 500, 500);
+        checkSamePosition();
+        drawVirus();
+        drawFruit();
+        moveSnakeForward();
+        drawSnake();
+
+        //check if snake eats the fruit - increase size of its tail, update score and find new fruit position
+        if (snakeHeadX === fruitX && snakeHeadY === fruitY) {
+            totalTail++;
+            //increase the speed of game after every 20 points
+            if(totalTail%20==0 && intervalDuration>minDuration) {
+                clearInterval(gameInterval);
+                window.clearInterval(virusInterval);
+                intervalDuration=intervalDuration-10;
+                main();
+            }
+            fruitPosition();
+        }
+        score.innerText = totalTail;
+
+    }, intervalDuration);
+}
