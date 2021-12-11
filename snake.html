@@ -15,9 +15,8 @@
         <h1>Snake</h1>
         <form class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
-              <input type="text" class="form-control" id="inputPassword2" placeholder="Snake's Name">
+              <input name="player_name" maxlength="20" class="form-control-plaintext" type= "text" id="player_name" placeholder="Type Snake's Name" required>
             </div>
-            <button type="submit" class="btn btn-primary mb-2">submit </button>
           </form>
         <div id="startBtn" class="btn btn-primary btn-lg">Start Game?</div>
         <div class="rel">
@@ -33,14 +32,39 @@
         </div>
         <canvas id="snakeCanvas" width="500" height="500"></canvas>
         <img id="virus" src="images/virus.png" alt="virus">
-        <img id="fruit" src="images/apple.png" alt="fruit">     
+        <img id="fruit" src="images/apple.png" alt="fruit"> 
+         <!-- Game Over Modal -->    
         <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <img id="snake" src="images/snake.png" alt="snake">     
                         <p>Game Over! Your Score is: <span id="scoreModal"></span></p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"> Highscores </button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal"> Highscores </button>
+                        <!-- Highscores Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Top 3 Snake Highscores</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!-- error container -->
+                                    <div id="error"></div>
+                                    <!-- High Score Lists -->
+                                    <ol id="highscores"></ol>
+                                    <!-- lowest high score hidden input -->
+                                    <input id="lowscore" type="hidden">
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn modal-btn" data-dismiss="modal">Ok</button>

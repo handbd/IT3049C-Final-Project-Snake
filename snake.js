@@ -191,7 +191,7 @@ let tailRadius = scale/4;
     for (i = 0; i < tail.length; i++) {
         tailRadius=tailRadius+((scale/2-scale/4)/tail.length);
         context.beginPath();
-        context.fillStyle = "#6c2c3a";
+        context.fillStyle = "#e1e318";
         context.arc((tail[i].tailX+scale/2), (tail[i].tailY+scale/2), tailRadius, 0, 2 * Math.PI);
         context.fill();
     }
@@ -227,7 +227,7 @@ drawSnakeTail();
 
 //display snake
 function drawSnake() {
-drawSnakeHead("#7d4350");
+drawSnakeHead("#cdcf2c");
 drawSnakeTail();
 if (checkCollision()) {
     clearInterval(gameInterval);
@@ -239,7 +239,7 @@ if (checkCollision()) {
     setTimeout(()=>{ 
         scoreModal.textContent = totalTail;
         $('#alertModal').modal('show');
-        
+
         //if modal is shown, remove the keydown event listener so that snake doesn't move 
         $( "#alertModal" ).on('shown.bs.modal', function(){
             window.removeEventListener("keydown", pressedKey);
