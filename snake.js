@@ -283,7 +283,6 @@ if (checkCollision()) {
             checkScore();
             clearScores();
             window.addEventListener("keydown", pressedKey);
-            window.addEventListener("keydown", pressedKey);
             reset();
           })
         modalBtn.addEventListener("click", ()=>{
