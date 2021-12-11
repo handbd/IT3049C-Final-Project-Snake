@@ -6,12 +6,12 @@ body {
 h1 {
     text-transform: uppercase;
     font-size: 2.5rem;
-    color: brown;
+    color: blue;
     font-weight: bold;
 }
 
 h2 {
-    color: brown;
+    color: blue;
     text-transform: uppercase;
     font-size: 1.5rem;
     position: absolute;
@@ -45,13 +45,13 @@ canvas {
 .btn {
     display: block;
     font-size: 1rem;
-    background-color: brown;
+    background-color: blue;
     color: #fff;
-    border: 1px solid brown;
+    border: 1px solid black;
 }
 
 .btn:hover {
-    color: brown;
+    color: blue;
     background-color: #fff;
 }
 
@@ -83,7 +83,7 @@ canvas {
 }
 
 #scoreModal {
-    color: brown;
+    color: blue;
     font-weight: bolder;
 }
 

@@ -4,7 +4,6 @@ var score = document.getElementById("score");
 var startBtn = document.getElementById("startBtn");
 var pauseBtn = document.getElementById("pauseBtn");
 var resumeBtn = document.getElementById("resumeBtn");
-var scoresBtn = document.getElementById("scoresBtn")
 // ol element containing high scores
 const List=document.getElementById("highscores");
 // game submition form
@@ -260,20 +259,13 @@ if (checkCollision()) {
           })
         modalBtn.addEventListener("click", ()=>{
             context.clearRect(0, 0, 500, 500);
-            score.innerText = 0;
+            //score.innerText = 0;
         });
     }, 1000);
 }
 }
 //---------------------------------------------------Highscore Board---------------------------------------------------//
-function resetForm (){
-    // delete li elements holding high score data
-    while (List.hasChildNodes()){
-        List.removeChild(List.firstChild);
-   }
-    // fetch scores.json and create new li elements holding the data
-    get_scores(list_scores);
-}
+
 myform.addEventListener("startBtn", function (event){// listen for the submit button to be clicked
     event.preventDefault(); // don't reload page
 
@@ -330,16 +322,19 @@ var list_scores=function (scores){
          let text=document.createTextNode(object[i].name + " ... " + object[i].score);
          li.appendChild(text);
          List.appendChild(li);
-        if (i===0){
-            li.setAttribute("class","top1");
-       }
-        if (i===1){
-            li.setAttribute("class","top2");
-       }
-        if (i===2){
-                    li.setAttribute("class","top3");
        }
     }
+
+function resetForm (){
+    // delete li elements holding high score data
+    while (List.hasChildNodes()){
+        List.removeChild(List.firstChild);
+   }
+    // fetch scores.json and create new li elements holding the data
+	 get_scores(list_scores);
+	 // set score back to 0
+	 document.getElementById("score").value=0;
+	 score=0;
 }
 
 
