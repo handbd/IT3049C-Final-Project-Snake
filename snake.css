@@ -93,8 +93,10 @@ canvas {
     border: 1px solid #ccc;
     border-radius: 10px;
     margin-top: 22px;
+    
 }
 
 #pauseBtn:hover, #resumeBtn:hover {
     background-color: #ccc;
 }
+

@@ -11,6 +11,8 @@ const List=document.getElementById("highscores");
 const myform=document.getElementById("myform");
 // element displaying error messages
 const Errors=document.getElementById("error");
+var third_score=document.getElementById("lowscore").value; // lowest high score
+var this_score=document.getElementById("score").value; // player's current score
 var fruit = document.getElementById("fruit");
 var virus = document.getElementById("virus");
 var snakeHeadX, snakeHeadY, fruitX, fruitY, virusX, virusY, tail, totalTail, directionVar, direction, previousDir;
@@ -245,7 +247,6 @@ if (checkCollision()) {
     setTimeout(()=>{ 
         scoreModal.textContent = totalTail;
         $('#alertModal').modal('show');
-
         //if modal is shown, remove the keydown event listener so that snake doesn't move 
         $( "#alertModal" ).on('shown.bs.modal', function(){
             window.removeEventListener("keydown", pressedKey);
@@ -273,6 +274,77 @@ function resetForm (){
     // fetch scores.json and create new li elements holding the data
     get_scores(list_scores);
 }
+myform.addEventListener("startBtn", function (event){// listen for the submit button to be clicked
+    event.preventDefault(); // don't reload page
+
+    //Form Data Object (to send to PHP): contains the players name and score
+    var formData=new FormData(this);
+    formData.append("score", score);
+
+    // fetch request
+    fetch ("Scoreboard.php",{// sending to dice.php
+        method: "post", // using method post
+        body: formData // we are sending formData
+   })
+        .then (function (response){
+            return response.text(); // Get the text contents
+       })
+        .then(function(text){
+            resetForm(); // execute resetForm function
+            console.log(text); // print the text contents to console
+       })
+        .catch(function (err){// If there is an error
+            Errors.innerHTML=err; // display error in errors element
+       })
+});
+
+// Function to get the high score JSON
+function get_scores (callback){
+    let file="scores.json";// file location
+    fetch(file,{cache: "no-cache"}) // fetch
+        // If the response isn OK
+         .then(function(response){
+             if (response.status !==200){
+                 Errors.innerHTML=response.status;
+            }
+         // If the response is OK
+         response.json().then(function(data){
+             let scores=JSON.stringify(data);
+             console.log(data);
+             callback (scores);
+        })
+    })
+    // If there is an error
+    .catch(function(err){
+         Errors.innerHTML=err;
+    });
+}
+
+//Function to display high score list
+var list_scores=function (scores){
+     let object=JSON.parse(scores);
+     let lowest_score=object[2].score;
+     document.getElementById("lowscore").value=lowest_score;
+     for (let i=0; i<object.length; i++){
+         let li=document.createElement("LI");
+         let text=document.createTextNode(object[i].name + " ... " + object[i].score);
+         li.appendChild(text);
+         List.appendChild(li);
+        if (i===0){
+            li.setAttribute("class","top1");
+       }
+        if (i===1){
+            li.setAttribute("class","top2");
+       }
+        if (i===2){
+                    li.setAttribute("class","top3");
+       }
+    }
+}
+
+
+
+
 
 
 //------------------------------------------------------VIRUS-----------------------------------------------------------//
