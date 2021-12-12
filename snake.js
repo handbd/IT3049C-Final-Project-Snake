@@ -338,10 +338,6 @@ function resetForm (){
 }
 
 
-
-
-
-
 //------------------------------------------------------VIRUS-----------------------------------------------------------//
 function virusPosition() {
     let virus=generateCoordinates();
